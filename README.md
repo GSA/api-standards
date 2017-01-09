@@ -2,20 +2,30 @@
 
 # GSA API Standards
 
-This document captures **GSA's recommended best practices and standards**. We encourage GSA development groups to used these standards when developing APIs.
+This document captures **GSA's recommended best practices and standards for Application Programming Interfaces (APIs)**. We encourage GSA development groups to used these standards when developing APIs.
 
-APIs, like other web applications, vary greatly in implementation and design, depending on the situation and the problem the application is solving.
+## About These Standards
 
-This document provides a mix of:
+These standards are forked from the [18F API Standards](https://github.com/18F/api-standards). They are also influenced by several other sources, including the [White House API Standards](https://github.com/WhiteHouse/api-standards), [API Evangelist](https://apievangelist.com), and [Spencer Schneidenbach](https://medium.com/@schneidenbach/restful-api-best-practices-and-common-pitfalls-7a83ba3763b5#.5acs6a8tj).
 
-* **High level design guidance** that individual APIs interpret to meet their needs.
-* **Low level web practices** that most modern HTTP APIs use.
+### The Standards are a roadmap not a roadblock
+
+This document is intended to streamline the process for GSA organizations to publish new APIs by providing practical and pragmatic advice. It is not intended to make this process more difficult.
+
+
+### They default to RESTful
+These standards assume the APIs will be generally "RESTful". However, many of the standards are equally appropriate for other types of web service. Specific recommendations are provided for SOAP web services.
+
+### They don't look under the covers
+Because APIs may be developed with multiple technologies, these standards avoid details internal to the development of the application or unique to a development platform. They focus on the "externals" such as user experience and interfaces.
+
+## Overall Considerations
 
 ### Design for common use cases
 
 For APIs that syndicate data, consider several common client use cases:
 
-* **Bulk data.** Clients often wish to establish their own copy of the API's dataset in its entirety. For example, someone might like to build their own search engine on top of the dataset, using different parameters and technology than the "official" API allows. If the API can't easily act as a bulk data provider, provide a separate mechanism for acquiring the backing dataset in bulk.
+* **Bulk data.** Clients often wish to establish their own copy of the API's dataset in its entirety. For example, someone might like to build their own search engine on top of the dataset, using different parameters and technology than the "official" API allows. If the API can't easily act as a bulk data provider, provide a separate mechanism for acquiring the backing dataset in bulk, such as posting the full dataset on [data.gov](https://www.data.gov/).
 * **Staying up to date.** Especially for large datasets, clients may want to keep their dataset up to date without downloading the data set after every change. If this is a use case for the API, prioritize it in the design.
 * **Driving expensive actions.** What would happen if a client wanted to automatically send text messages to thousands of people or light up the side of a skyscraper every time a new record appears? Consider whether the API's records will always be in a reliable unchanging order, and whether they tend to appear in clumps or in a steady stream. Generally speaking, consider the "entropy" an API client would experience.
 
@@ -25,11 +35,45 @@ The #1 best way to understand and address the weaknesses in an API's design and 
 
 Whenever feasible, design an API in parallel with an accompanying integration of that API.
 
+A few methods to accomplish this include:
+* Identifying an internal GSA organization to use your API while also publishing it publicly.
+* Creating a web page with a search feature that uses the API.
+* Modifying existing web pages or web applications to use the API instead of direct access to the database.
+
+## Developers Are Your End Users
+Consider developers who will be using your APIs. Their path to using your API will include discovery and inital investigation, sample API calls, development and testing, deployment and production usage. Consider each of these functions in your documentation, support, and change notification process. Consider performing formal [API Usability Testing](### Default to REST
+These standards assuming the APIs will be generally "Restful". However, recommendations are also provided for SOAP web services.
+) to understand the developer experience in using your API.
+
+### Add Your API To The GSA API Directory
+A directory of GSA public APIs is available at [open.gsa.gov/developer](open.gsa.gov/developer/). You can add your API to this directory by posting an issue or pull request in the [GitHub repository](https://github.com/GSA/open.gsa.gov).
+
+### Provide Documentation
+The developer's entry point to your API will likely be the documentation that you provide. GSA has developed an [API Documentation Template](https://github.com/GSA/api-documentation-template) which can easily be re-used for your API.
+
+At a minimum, API documentation should provide:
+* An overview of the contents of the API and the data sources.
+* Production URLs for accessing the API.
+* Required parameters and defaults.
+* A description of the data that is returned.
+* A description of the error codes that are returned, and their meaning.
+
+Additional nice-to-haves include:
+* Explanation of key management and a sample key.
+* Description of update frequency.
+* Interactive documentation to demonstrate sample calls.
+* Sample client code for consuming the API in common languages.
+
 ### Point of contact
 
 Have an obvious mechanism for clients to report issues and ask questions about the API.
 
 When using GitHub for an API's code, use the associated issue tracker. In addition, publish an email address for direct, non-public inquiries.
+
+### Avoid an API "Ghost Town" by responding to issues and questions
+Developers can immediately sniff out a stale and unsupported API by old issues never answered and contact emails that no longer work.
+
+It is critical to respond to issues posted or queries submitted by developers. This demonstrates that the API can be counted on for production usage. If an immediate fix (or even a developer to investigate) is not readily available, respond anyway. Developers will be glad to know when you'll be able to take a look.
 
 ### Notifications of updates
 
@@ -37,7 +81,18 @@ Have a simple mechanism for clients to follow changes to the API.
 
 Common ways to do this include a mailing list, or a [dedicated developer blog](https://developer.github.com/changes/) with an RSS feed.
 
+### Decommission Unsupported APIs
+
+If an API can no longer be supported, consider decommissioning the API and removing the documentation. If the API will remain available for historical purposes without support, update the documentation to reflect this.
+
+### Avoid Breaking Changes
+
+*TodDo: flesh this out*
+
+## Design considerations
+
 ### API Endpoints
+*Todo: give specific recommendations on URL*
 
 An "endpoint" is a combination of two things:
 
@@ -63,7 +118,13 @@ Some examples of these principles in action:
 * [OpenFDA example query](https://open.fda.gov/api/reference/#example-query)
 * [Sunlight Congress API methods](https://sunlightlabs.github.io/congress/#using-the-api)
 
-### Just use JSON
+### Taxonomy 
+If the API is intended to share data across the GSA enteprise or beyond, consider referencing the GSA Taxonomy. Contact GSA's Chief Data Officer for more information.
+
+### Versioning
+The recommended method of versioning APIs is to include a version number in the URL path. For example "/v1". 
+
+### Use JSON
 
 [JSON](https://en.wikipedia.org/wiki/JSON) is an excellent, widely supported transport format, suitable for many web APIs.
 
@@ -93,6 +154,8 @@ But _if_ keys are used to manage and authenticate API access, the API should all
 This allows newcomers to use and experiment with the API in demo environments and with simple `curl`/`wget`/etc. requests.
 
 Consider whether one of your product goals is to allow a certain level of normal production use of the API without enforcing advanced registration by clients.
+
+*TODO: recommend api.data.gov with GSA specific intructions*
 
 
 ### Error handling
@@ -203,6 +266,16 @@ For more advanced configuration, see the [W3C spec](http://www.w3.org/TR/cors/) 
 **What about JSONP?**
 
 JSONP is [not secure or performant](https://gist.github.com/tmcw/6244497). If IE8 or IE9 must be supported, use Microsoft's [XDomainRequest](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx?Redirected=true) object instead of JSONP. There are [libraries](https://github.com/mapbox/corslite) to help with this.
+
+###SOAP Web Services
+*Todo: best practices for SOAP web services*
+
+##Future Topics
+Several additional API related topics continue to emerge and will be considered for future API standards.
+
+That list includes:
+* Microservices
+* Hypermedia and HATEOAS
 
 
 ## Public domain
