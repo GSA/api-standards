@@ -4,12 +4,20 @@ This document captures **GSA's recommended best practices, conventions, and stan
 
 
 # Index
-[About These Standards](#about-these-standards)  
-[Mandatory Items](#mandatory-items)  
-[Mandatory For New APIs](#mandatory-for-new-apis)  
-[Other Considerations](#other-considerations)  
-[SOAP Web Services](#soap-web-services)  
-[Future Topics](#future-topics)  
+* [About These Standards](#about-these-standards)  
+* [Mandatory Items](#mandatory-items)   
+  * [HTTPS](#1-always-use-https)  
+  * [GSA API Directory](#2-add-your-api-to-the-gsa-api-directory)  
+  * [api.data.gov](#3-use-the-apidatagov-service)  
+  * [Versioning](#4-provide-support-for-versioning)  
+  * [Documentation](#5-provide-public-documentation)  
+  * [Feedback Mechanism](#6-provide-a-feedback-mechanism-that-is-clear-and-monitored)  
+  * [OpenAPI](#7-provide-an-openapi-specification-file)  
+* [Mandatory For New APIs](#mandatory-for-new-apis)    
+  * [API Endpoint Design](#8-follow-the-standard-api-endpoint-design)   
+* [Other Considerations](#other-considerations)   
+* [SOAP Web Services](#soap-web-services)   
+* [Future Topics](#future-topics)   
 
 
 ## About These Standards
