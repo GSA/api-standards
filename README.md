@@ -6,7 +6,8 @@ This document captures **GSA's recommended best practices, conventions, and stan
 # Index
 [About These Standards](#about-these-standards)  
 [API Security](#api-security)  
-[Mandatory Items](#mandatory-items)  
+[Mandatory Items For Public APIs](#mandatory-items-for-public-apis)  
+[Mandatory Items For Limited Partner APIs](#mandatory-items-for-limited-partner-apis)  
 [Other Considerations](#other-considerations)  
 [SOAP Web Services](#soap-web-services)  
 [Future Topics](#future-topics)  
