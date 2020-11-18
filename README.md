@@ -180,7 +180,7 @@ Additional nice-to-haves include:
 
 On the public or protected documentation page, include a method for users to report issues and ask questions about the API. It is critical to respond to issues posted or queries submitted by developers. This demonstrates that the API can be counted on for production usage. If an immediate fix (or even a developer to investigate) is not readily available, respond anyway. Developers will be glad to know when you'll be able to take a look.
 
-## Recomended Items for Limited Partner APIs ##
+## Recommended Items for Limited Partner APIs ##
 
 The following items will be beneficial to the users of your APIs. (Full details of these items are linked to the previous section of this document.)
 
