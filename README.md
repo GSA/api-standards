@@ -41,7 +41,7 @@ API Security is governed by the GSA IT Security Procedural Guide: API Security C
 
 ## Mandatory Items for Public APIs ##
 
-These are mandatory for GSA public APIs, with exceptions where noted.
+These are mandatory for GSA public APIs, with exceptions where noted. See [**diagram** showing the flow](https://docs.google.com/drawings/d/1-njO8mnqPvH-Ifv0MgME5_Td3uzxbECm08eR7kWRpZs/edit).
 
 ### 1. Fill out the Intake Form
 
