@@ -42,12 +42,16 @@ API Security is governed by the GSA IT Security Procedural Guide: API Security C
 
 ## Mandatory Items for Public APIs ##
 
-These are mandatory for GSA public APIs, with exceptions where noted.
+These are mandatory for GSA public APIs, with exceptions where noted. See [**diagram** showing the flow](https://docs.google.com/drawings/d/1-njO8mnqPvH-Ifv0MgME5_Td3uzxbECm08eR7kWRpZs/edit).
 
-### 1. Add Your API To The GSA API Directory
+### 1. Fill out the Intake Form
+
+[Form](https://docs.google.com/forms/d/e/1FAIpQLScXc2NwOmgeambJeksv-w-ugTzTHQgXQPwBm42poIzQpjwIPQ/viewform)
+
+### 2. Add Your API To The GSA API Directory
 (Public APIs) A directory of GSA public APIs is available at [open.gsa.gov/api](https://open.gsa.gov/api/). Add your API to this directory by posting an issue or pull request in the [GitHub repository](https://github.com/GSA/open-gsa-redesign). 
 
-### 2. Use The api.data.gov Service
+### 3. Use The api.data.gov Service
 
 (Public APIs) The [api.data.gov service](https://api.data.gov/about/) is an API management service for federal agencies. GSA APIs should use the `api.gsa.gov` base domain with this service.  By having the `api.gsa.gov` base URL as a proxy to developers, this also makes it easier to update and maintain the API in the future since you can update the underlying system and URLs without exposing it to the public.  In some cases, other specific base domains can be established with this service for GSA APIs.
 
@@ -64,7 +68,7 @@ Keys managed by api.data.gov can be re-used with other APIs hosted by this servi
 
 _Exceptions: Not required for SOAP APIs. However, it may still provide value to your SOAP API._
 
-### 3. Provide Support For Versioning
+### 4. Provide Support For Versioning
 All APIs must support versioning. The recommended method of versioning REST APIs is to include a major version number in the URL path. For example "/v1/". An example of this method can be found at: https://gsa.github.io/sam_api/sam/versioning.html.
 
 #### Major and Minor Versions
@@ -106,7 +110,7 @@ Leave at least one previous major version intact. And communicate to existing us
 #### Prototype or Alpha Versions
 Use "/v0/" to represent an API that is in prototype or alpha phase and is likely to change frequently without warning.
 
-### 4. Provide Public Documentation
+### 5. Provide Public Documentation
 The developer's entry point to your API will likely be the documentation that you provide.
 
 Your API documentation should provide:
@@ -122,7 +126,7 @@ Additional nice-to-haves include:
 * Interactive documentation to demonstrate sample calls.
 * Sample client code for consuming the API in common languages.
 
-### 5. Provide A Feedback Mechanism That Is Clear and Monitored
+### 6. Provide A Feedback Mechanism That Is Clear and Monitored
 
 Have an obvious mechanism for clients to report issues and ask questions about the API. It is critical to respond to issues posted or queries submitted by developers. This demonstrates that the API can be counted on for production usage. If an immediate fix (or even a developer to investigate) is not readily available, respond anyway. Developers will be glad to know when you'll be able to take a look.
 
@@ -130,14 +134,14 @@ When using GitHub for an API's code or documentation, use the associated issue t
 
 If you don't have a support channel specific to your API, you can use the issue tracker at [GSA-APIs](https://github.com/GSA/GSA-APIs/issues). Be sure your support team subscribes to issues there.
 
-### 6. Provide An OpenAPI Specification File
+### 7. Provide An OpenAPI Specification File
 For REST APIs, The API documentation should provide a clear link to the [API's OpenAPI Specification file](https://github.com/OAI/OpenAPI-Specification). This specification was formerly known as the Swagger specification. This specification file can be used by development or testing tools accessing your API. 
 
 Using Version 2.0 or later of the specification is recommended. Information about versions can be found here: [OpenAPI Specification Revision History](https://swagger.io/specification/#revisionHistory).
 
 _Exceptions: Not required for SOAP APIs._
 
-### 7. Follow The Standard API Endpoint Design
+### 8. Follow The Standard API Endpoint Design
 For REST APIs, An "endpoint" is a combination of two things:
 
 * The verb (e.g. `GET` , `POST`, `PUT`, `PATCH`, `DELETE`)
