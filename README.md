@@ -42,7 +42,9 @@ API Security is governed by the GSA IT Security Procedural Guide: API Security C
 
 ## Mandatory Items for Public APIs ##
 
-These are mandatory for GSA public APIs, with exceptions where noted.
+These are mandatory for GSA public APIs, with exceptions where noted. 
+
+Part of this process is to first complete the neccessary steps to add your GitHub Account to the GSA Organization and then send an email to the CISS API team to have your account added to the open-gsa-redesign User Group. The steps are documented on the [Adding API Documentation](https://github.com/GSA/open-gsa-redesign/blob/master/APIDOCS.md) GitHub page.  
 
 ### 1. Add Your API To The GSA API Directory
 (Public APIs) A directory of GSA public APIs is available at [open.gsa.gov/api](https://open.gsa.gov/api/). Add your API to this directory by posting an issue or pull request in the [GitHub repository](https://github.com/GSA/open-gsa-redesign). 
