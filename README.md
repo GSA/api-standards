@@ -233,6 +233,12 @@ Common ways to do this include a mailing list or a persistent issue in the GitHu
 
 If an API can no longer be supported, consider decommissioning the API and removing the documentation. If the API will remain available for historical purposes without support, update the documentation to reflect this.
 
+### Notify current users and update documentation before breaking changes or decommissioning
+
+If an API is going to be decommissioned, retired, or [changed in such a way that current users will be impacted](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible), it is critical that those users be notified in advance so that they can prepare for the change instead of experiencing an unexpected interruption.  The most common situations where this happens is if an API is going to be decommissioned or if an update to the API will change how the API functions (note that this is where [Versioning](https://github.com/GSA/api-standards#3-provide-support-for-versioning) is important).  If these users aren't notified, their application that consumes the API [may break](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible) and they may suffer significant consequences from their application's resulting downtime.  Furthermore, experiencing this may seriously degrade the trust that the developer has in GSA's API programs and may cause them to avoid our services going forward if they feel that they cannot rely on them.  
+
+In addition to updating the API documentation in advance with a highly visible notice, it is important to use [API analytics](https://github.com/GSA/api-standards#2-use-the-apidatagov-service) to see which API keys have consumed the service in recent months.  You can then use the email addresses associated with each key to send (preferably more than one) notification of the upcoming change.  Note that posting a notice on the API documentation is not sufficient by itself, as many current users will not necessarily revisit the documentatation.  Proactive notification of recent users is essential.  
+
 ### Use JSON
 
 [JSON](https://en.wikipedia.org/wiki/JSON) is an excellent, widely supported transport format, suitable for many web APIs.
