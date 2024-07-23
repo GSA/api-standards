@@ -2,15 +2,17 @@
 
 This document captures **GSA's recommended best practices, conventions, and standards for Application Programming Interfaces (APIs)**. Projects should start by addressing [API Security](#api-security), followed by implementing the [Mandatory Items](#mandatory-items) and [Mandatory For New Public APIs](#mandatory-for-new-public-apis). After addressing those, review [Other Considerations](#other-considerations) for additional advice.
 
-
-# Index
-[About These Standards](#about-these-standards)  
-[API Security](#api-security)  
-[Mandatory Items For Public APIs](#mandatory-items-for-public-apis)  
-[Mandatory Items For Limited Partner APIs](#mandatory-items-for-limited-partner-apis)  
-[Other Considerations](#other-considerations)  
-[SOAP Web Services](#soap-web-services)  
-[Future Topics](#future-topics)  
+## Contents
+- [About These Standards](#about-these-standards)
+- [API Security](#api-security)
+- [Mandatory Items for Public APIs](#mandatory-items-for-public-apis)
+- [Recommended Items for Public APIs](#recommended-items-for-public-apis)
+- [Mandatory Items for Limited Partner APIs](#mandatory-items-for-limited-partner-apis)
+- [Recommended Items for Limited Partner APIs](#recommended-items-for-limited-partner-apis)
+- [Other Considerations](#other-considerations)
+- [API Testing](#api-testing)
+- [SOAP Web Services](#soap-web-services)
+- [Future Topics](#future-topics)
 
 
 ## About These Standards
@@ -19,11 +21,11 @@ These standards are forked from the [18F API Standards](https://github.com/18F/a
 
 ### The standards are a roadmap not a roadblock
 
-These standards are intended to streamline the process for GSA organizations to publish new APIs by providing practical and pragmatic advice. We believe these standards will benefit GSA API development and provide consistency. 
+These standards are intended to streamline the process for GSA organizations to publish new APIs by providing practical and pragmatic advice. We believe these standards will benefit GSA API development and provide consistency.
 
 
 ### They primarily focus on RESTful APIs
-Most of the content in these standards relates to "RESTful" APIs. However, many of the standards are equally appropriate for other types of web service. 
+Most of the content in these standards relates to "RESTful" APIs. However, many of the standards are equally appropriate for other types of web service.
 
 A few specific recommendations are provided for [SOAP web services](#soap-web-services), and we encourage the GSA community to share more recommendations.
 
@@ -42,12 +44,12 @@ API Security is governed by the GSA IT Security Procedural Guide: API Security C
 
 ## Mandatory Items for Public APIs ##
 
-These are mandatory for GSA public APIs, with exceptions where noted. 
+These are mandatory for GSA public APIs, with exceptions where noted.
 
 ### 1. Add Your API To The GSA API Directory
-(Public APIs) A directory of GSA public APIs is available at [open.gsa.gov/api](https://open.gsa.gov/api/). Add your API to this directory by posting an issue or pull request in the [GitHub repository](https://github.com/GSA/open-gsa-redesign). 
+(Public APIs) A directory of GSA public APIs is available at [open.gsa.gov/api](https://open.gsa.gov/api/). Add your API to this directory by posting an issue or pull request in the [GitHub repository](https://github.com/GSA/open-gsa-redesign).
 
-Part of this process is to first complete the neccessary steps to add your GitHub Account to the GSA Organization and then send an email to the CTO team to have your account added to the open-gsa-redesign User Group. The steps are documented on the [Adding API Documentation](https://github.com/GSA/open-gsa-redesign/blob/master/APIDOCS.md) GitHub page.  
+Part of this process is to first complete the neccessary steps to add your GitHub Account to the GSA Organization and then send an email to the CTO team to have your account added to the open-gsa-redesign User Group. The steps are documented on the [Adding API Documentation](https://github.com/GSA/open-gsa-redesign/blob/master/APIDOCS.md) GitHub page.
 
 ### 2. Use The api.data.gov Service
 
@@ -70,10 +72,10 @@ _Exceptions: Not required for SOAP APIs. However, it may still provide value to 
 All APIs must support versioning. The recommended method of versioning REST APIs is to include a major version number in the URL path. For example "/v1/". An example of this method can be found at: https://gsa.github.io/sam_api/sam/versioning.html.
 
 #### Major and Minor Versions
-Major versions (e.g. v1, v2) should be reserved for breaking changes and major releases. Minor versions (eg. 1.1, 2.3) are not required, but can provide additional information about the API. If used, they should not be in the URL, but should be in the HTTP Headers. 
+Major versions (e.g. v1, v2) should be reserved for breaking changes and major releases. Minor versions (eg. 1.1, 2.3) are not required, but can provide additional information about the API. If used, they should not be in the URL, but should be in the HTTP Headers.
 
-#### Breaking Changes (backwards-incompatible) 
-Any changes made to a specific version of your API should not break your contract with existing users. If you need to make a change that will break that contract, create a new major version. 
+#### Breaking Changes (backwards-incompatible)
+Any changes made to a specific version of your API should not break your contract with existing users. If you need to make a change that will break that contract, create a new major version.
 
 Examples of Breaking Changes for REST APIs:
 - Removing an HTTP method
@@ -133,7 +135,7 @@ When using GitHub for an API's code or documentation, use the associated issue t
 If you don't have a support channel specific to your API, you can use the issue tracker at [GSA-APIs](https://github.com/GSA/GSA-APIs/issues). Be sure your support team subscribes to issues there.
 
 ### 6. Provide An OpenAPI Specification File
-For REST APIs, The API documentation should provide a clear link to the [API's OpenAPI Specification file](https://github.com/OAI/OpenAPI-Specification). This specification was formerly known as the Swagger specification. This specification file can be used by development or testing tools accessing your API. 
+For REST APIs, The API documentation should provide a clear link to the [API's OpenAPI Specification file](https://github.com/OAI/OpenAPI-Specification). This specification was formerly known as the Swagger specification. This specification file can be used by development or testing tools accessing your API.
 
 Using Version 2.0 or later of the specification is recommended. Information about versions can be found here: [OpenAPI Specification Revision History](https://swagger.io/specification/#revisionHistory).
 
@@ -159,8 +161,48 @@ An example would be:
 
 _Exceptions: Not required for SOAP APIs. Not required for APIs that were in progress or production prior to December 2018._
 
-## Mandatory Items for Limited Partner APIs ##
 
+## Recommended Items for Public APIs
+
+### 1. Provide a Testing UI
+
+When you have an OpenAPI specification file (mandatory for public APIs), there are tools that can use this specification file to automatically generate a page where your users can try out your API without too much effort. [Swagger UI is one such tool; here is an example](https://petstore.swagger.io/).
+
+We strongly recommend implementing this item, as it provides a significant enhancement to developer experience and helps ensure proper use of your API. Swagger UI can be implemented on any website, even a static site, with the inclusion of a few JavaScript and CSS files.
+
+[See the Swagger UI project for installation and configuration instructions](https://github.com/swagger-api/swagger-ui).
+
+After downloading Swagger UI, you generally will want a page that loads the Swagger UI and your OpenAPI specification file:
+
+```html
+<!-- in the HEAD of the page -->
+<link rel="stylesheet" type="text/css" href="swagger-ui.css" >
+
+<!-- in the BODY of the page -->
+<div id="swagger-ui"></div>
+<script src="swagger-ui-bundle.js"></script>
+<script src="swagger-ui-standalone-preset.js"></script>
+<script>
+  window.onload = function() {
+    // openapi.yaml is your OpenAPI specification file (can also be a JSON file)
+    const ui = SwaggerUIBundle({
+      url: "openapi.yaml",
+      dom_id: '#swagger-ui',
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIBundle.SwaggerUIStandalonePreset,
+      ],
+      layout: "StandaloneLayout"
+    })
+    window.ui = ui
+  }
+</script>
+```
+
+Depending on your site, the above is roughly all you need to generate the API testing tool.
+
+
+## Mandatory Items for Limited Partner APIs
 
 
 ### 1. Provide Public or Protected Documentation
@@ -183,14 +225,14 @@ Additional nice-to-haves include:
 
 On the public or protected documentation page, include a method for users to report issues and ask questions about the API. It is critical to respond to issues posted or queries submitted by developers. This demonstrates that the API can be counted on for production usage. If an immediate fix (or even a developer to investigate) is not readily available, respond anyway. Developers will be glad to know when you'll be able to take a look.
 
-## Recommended Items for Limited Partner APIs ##
+## Recommended Items for Limited Partner APIs
 
 The following items will be beneficial to the users of your APIs. (Full details of these items are linked to the previous section of this document.)
 
-[Add Your API To The GSA API Directory](#1-add-your-api-to-the-gsa-api-directory)  
-[Use The api.data.gov Service](#2-use-the-apidatagov-service)  
-[Provide Support For Versioning](#3-provide-support-for-versioning)  
-[Provide An OpenAPI Specification File](#6-provide-an-openapi-specification-file)  
+[Add Your API To The GSA API Directory](#1-add-your-api-to-the-gsa-api-directory)
+[Use The api.data.gov Service](#2-use-the-apidatagov-service)
+[Provide Support For Versioning](#3-provide-support-for-versioning)
+[Provide An OpenAPI Specification File](#6-provide-an-openapi-specification-file)
 [Follow the Standard API Endpoint Design](#7-follow-the-standard-api-endpoint-design)
 
 
@@ -235,9 +277,9 @@ If an API can no longer be supported, consider decommissioning the API and remov
 
 ### Notify current users and update documentation before breaking changes or decommissioning
 
-If an API is going to be decommissioned, retired, or [changed in such a way that current users will be impacted](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible), it is critical that those users be notified in advance so that they can prepare for the change instead of experiencing an unexpected interruption.  The most common situations where this happens is if an API is going to be decommissioned or if an update to the API will change how the API functions (note that this is where [Versioning](https://github.com/GSA/api-standards#3-provide-support-for-versioning) is important).  If these users aren't notified, their application that consumes the API [may break](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible) and they may suffer significant consequences from their application's resulting downtime.  Furthermore, experiencing this may seriously degrade the trust that the developer has in GSA's API programs and may cause them to avoid our services going forward if they feel that they cannot rely on them.  
+If an API is going to be decommissioned, retired, or [changed in such a way that current users will be impacted](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible), it is critical that those users be notified in advance so that they can prepare for the change instead of experiencing an unexpected interruption.  The most common situations where this happens is if an API is going to be decommissioned or if an update to the API will change how the API functions (note that this is where [Versioning](https://github.com/GSA/api-standards#3-provide-support-for-versioning) is important).  If these users aren't notified, their application that consumes the API [may break](https://github.com/GSA/api-standards#breaking-changes-backwards-incompatible) and they may suffer significant consequences from their application's resulting downtime.  Furthermore, experiencing this may seriously degrade the trust that the developer has in GSA's API programs and may cause them to avoid our services going forward if they feel that they cannot rely on them.
 
-In addition to updating the API documentation in advance with a highly visible notice, it is important to use [API analytics](https://github.com/GSA/api-standards#2-use-the-apidatagov-service) to see which API keys have consumed the service in recent months.  You can then use the email addresses associated with each key to send (preferably more than one) notification of the upcoming change.  Note that posting a notice on the API documentation is not sufficient by itself, as many current users will not necessarily revisit the documentatation.  Proactive notification of recent users is essential.  
+In addition to updating the API documentation in advance with a highly visible notice, it is important to use [API analytics](https://github.com/GSA/api-standards#2-use-the-apidatagov-service) to see which API keys have consumed the service in recent months.  You can then use the email addresses associated with each key to send (preferably more than one) notification of the upcoming change.  Note that posting a notice on the API documentation is not sufficient by itself, as many current users will not necessarily revisit the documentatation.  Proactive notification of recent users is essential.
 
 ### Use JSON
 
@@ -267,7 +309,7 @@ The following are recommended HTTP Response Codes that API should return. They a
 | ---  | ----- | --------------------- |
 | 200  | OK | Response to a successful REST API action. The HTTP method can be GET, POST, PUT, PATCH or DELETE. |
 | 201  | Created | The request has been fulfilled and the resource created. A URL for the created resource is returned in the Location header. |
-| 202  | Accepted | The request has been accepted for processing, but processing is not yet complete | 
+| 202  | Accepted | The request has been accepted for processing, but processing is not yet complete |
 | 400  | Bad Request | The request is malformed, such as a message body format error, missing headers, etc. |
 | 401  | Unauthorized | Wrong or no authentication ID/ password provided. |
 | 403  | Forbidden | Used when the authentication succeeded but the authenticated user does not have permission to the requested resource. |
@@ -276,7 +318,7 @@ The following are recommended HTTP Response Codes that API should return. They a
 | 405  | Method Not Allowed | The error for an unexpected HTTP method. For example, the REST API is expecting HTTP GET, but HTTP PUT is used. |
 | 413  | Payload Too Large | Used to signal that the request size exceeded the given limit (e.g. regarding file uploads and to ensure that the requests have reasonable sizes). |
 | 415  | Unsupported Media Type | The requested content type is not supported by the REST service. This is especially effective when you are working primary with JSON or XML media types. |
-| 429  | Too Many Requests | The error is used when there may be a DOS attack detected or the request is rejected due to rate limiting. | 
+| 429  | Too Many Requests | The error is used when there may be a DOS attack detected or the request is rejected due to rate limiting. |
 | 500  | Internal Server Error | An unexpected condition prevented the server from fulfilling the request. Be aware that the response should not reveal internal information that helps an attacker, e.g. detailed error messages or stack traces. |
 | 501  | Not Implemented | The REST service does not implement the requested operation yet |
 | 502  | Service Unavailable | The REST service is temporarily unable to process the request. Used to inform the client it should retry at a later time. |
@@ -347,22 +389,22 @@ At its most basic level, API testing is intended to reveal bugs: inconsistencies
 - **Reliability testing** — the API can be consistently connected to and lead to consistent results.
 - **Load testing** — the API can handle a large amount of calls.
 - **Creativity testing** — the API can handle being used in different ways.
-- **Security testing** — the API has defined security requirements including authentication, permissions and access controls. 
+- **Security testing** — the API has defined security requirements including authentication, permissions and access controls.
 - **Proficiency testing** — the API increases what developers are able to do.
 - **API documentation testing** — also called discovery testing, the API documentation easily guides the user.
 - **Negative Testing** — checking for every kind of wrong input the user can possibly supply.
 
 
 ## SOAP Web Services
-* Provide a WSDL. 
+* Provide a WSDL.
 
   Most platforms will provide this by default out of the box. Leave it active unless you have a strong reason not to. A useful convention is that the WSDL will be available at: {URL Path)?wsdl
 
 * Provide documentation for SOAP web services.
 
-  Users of SOAP web services need documentation, just like REST users. 
+  Users of SOAP web services need documentation, just like REST users.
 
-* See examples of versioning of SOAP web services above. 
+* See examples of versioning of SOAP web services above.
 
 ## Future Topics
 Several additional API related topics continue to emerge and will be considered for future updates to these standards.
@@ -373,17 +415,5 @@ That list includes:
 * Responsive APIs
 * GraphQL
 
-### What are we missing? 
+### What are we missing?
 If you see a future topic we need to consider, take a look at our [contributing page](https://github.com/GSA/api-standards/blob/master/CONTRIBUTING.md) for instructions to share that info.
-
-
-## Public domain
-
-This project is in the public domain within the United States, and
-copyright and related rights in the work worldwide are waived through
-the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
-
-All contributions to this project will be released under the CC0
-dedication. By submitting a pull request, you are agreeing to comply
-with this waiver of copyright interest.
-
